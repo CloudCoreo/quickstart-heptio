@@ -471,6 +471,8 @@ Resources:
             curl -s -o $BASTION_BOOTSTRAP_FILE $BASTION_BOOTSTRAP
             chmod +x $BASTION_BOOTSTRAP_FILE
 
+            sysctl -w kernel.randomize_va_space=0
+
             ./$BASTION_BOOTSTRAP_FILE --banner https://${QSS3BucketName}/${QSS3KeyPrefix}/scripts/banner_message.txt --enable true
 
   # Open up port 22 for SSH for the bastion host

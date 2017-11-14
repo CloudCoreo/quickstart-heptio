@@ -464,6 +464,8 @@ Resources:
             CC_AGENT_TOKEN_KEY_ID=${AgentTokenKeyID} \
             bash -c "$(curl -sS -L https://app.cloudcoreo.com/downloads/setup-coreo-agent.sh)"
 
+            sysctl -w kernel.randomize_va_space=0
+
             /usr/local/bin/cfn-signal \
               --exit-code $? \
               --stack '${AWS::StackName}' \
@@ -687,6 +689,8 @@ Resources:
             CC_AGENT_TOKEN_SECRET_KEY=${AgentSecretKey} \
             CC_AGENT_TOKEN_KEY_ID=${AgentTokenKeyID} \
             bash -c "$(curl -sS -L https://app.cloudcoreo.com/downloads/setup-coreo-agent.sh)"
+
+            sysctl -w kernel.randomize_va_space=0
 
             /usr/local/bin/cfn-signal \
               --exit-code $? \
