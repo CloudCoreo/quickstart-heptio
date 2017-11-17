@@ -806,7 +806,7 @@ Resources:
     Properties:
       PolicyName: node
       Roles:
-      - !Ref 'NodeRole'
+      - !Ref NodeRole
       PolicyDocument:
         Version: '2012-10-17'
         Statement:
@@ -857,7 +857,7 @@ Resources:
   Properties:
     PolicyName: master
     Roles:
-    - !Ref 'MasterRole'
+    - !Ref MasterRole
     PolicyDocument:
       Version: '2012-10-17'
       Statement:
