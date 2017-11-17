@@ -874,6 +874,12 @@ Resources:
         InstancePort: 6443
         InstanceProtocol: TCP
         LoadBalancerPort: 443
+      Policies:
+      - Attributes:
+        - Name: Reference-Security-Policy
+          Value: ELBSecurityPolicy-2014-10
+        PolicyName: ELBSecurityPolicyName
+        PolicyType: SSLNegotiationPolicyType
       ConnectionSettings:
         IdleTimeout: 3600
       Subnets:
