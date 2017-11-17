@@ -802,7 +802,7 @@ Resources:
             Resource: !Sub ["${LogGroupArn}:*", LogGroupArn: !GetAtt KubernetesLogGroup.Arn]
 
   NodeInstancePolicy:
-    Type: AWS::IAM:Policy
+    Type: AWS::IAM::Policy
     Properties:
       PolicyName: node
       Roles:
@@ -853,7 +853,7 @@ Resources:
             Resource: !Sub ["${LogGroupArn}:*", LogGroupArn: !GetAtt KubernetesLogGroup.Arn]
 
   MasterInstancePolicy:
-    Type: AWS::IAM:Policy
+    Type: AWS::IAM::Policy
     Properties:
       PolicyName: master
       Roles:
