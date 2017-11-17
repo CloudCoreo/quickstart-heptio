@@ -853,17 +853,17 @@ Resources:
             Resource: !Sub ["${LogGroupArn}:*", LogGroupArn: !GetAtt KubernetesLogGroup.Arn]
 
   MasterInstancePolicy:
-  Type: AWS::IAM:Policy
-  Properties:
-    PolicyName: master
-    Roles:
-    - !Ref MasterRole
-    PolicyDocument:
-      Version: '2012-10-17'
-      Statement:
-      - Effect: Allow
-        Action: "*"
-        Resource: "*"
+    Type: AWS::IAM:Policy
+    Properties:
+      PolicyName: master
+      Roles:
+      - !Ref MasterRole
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Action: "*"
+          Resource: "*"
 
   # Resource that creates the master node IAM role
   MasterInstanceProfile:
