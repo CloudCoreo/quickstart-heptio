@@ -789,14 +789,6 @@ Resources:
       # IAM policy for nodes that allows specific AWS resource listing and creation
       # http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html
       Policies:
-      - PolicyName: node
-        PolicyDocument:
-          Version: '2012-10-17'
-          Statement:
-          - Effect: Allow
-            Action: "*"
-            Resource: "*"
-
       - PolicyName: cwlogs
         PolicyDocument:
           Version: '2012-10-17'
@@ -808,6 +800,19 @@ Resources:
             - logs:PutLogEvents
             - logs:DescribeLogStreams
             Resource: !Sub ["${LogGroupArn}:*", LogGroupArn: !GetAtt KubernetesLogGroup.Arn]
+
+  NodeInstancePolicy:
+    Type: AWS::IAM:Policy
+    Properties:
+      PolicyName: node
+      Roles:
+      - !Ref 'NodeRole'
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Action: "*"
+          Resource: "*"
 
   # Resource that creates the node IAM role
   NodeInstanceProfile:
@@ -835,14 +840,6 @@ Resources:
       # More permissive than the node role (it allows load balancer creation)
       # http://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html
       Policies:
-      - PolicyName: master
-        PolicyDocument:
-          Version: '2012-10-17'
-          Statement:
-          - Effect: Allow
-            Action: "*"
-            Resource: "*"
-
       - PolicyName: cwlogs
         PolicyDocument:
           Version: '2012-10-17'
@@ -854,6 +851,19 @@ Resources:
             - logs:PutLogEvents
             - logs:DescribeLogStreams
             Resource: !Sub ["${LogGroupArn}:*", LogGroupArn: !GetAtt KubernetesLogGroup.Arn]
+
+  MasterInstancePolicy:
+  Type: AWS::IAM:Policy
+  Properties:
+    PolicyName: master
+    Roles:
+    - !Ref 'MasterRole'
+    PolicyDocument:
+      Version: '2012-10-17'
+      Statement:
+      - Effect: Allow
+        Action: "*"
+        Resource: "*"
 
   # Resource that creates the master node IAM role
   MasterInstanceProfile:
