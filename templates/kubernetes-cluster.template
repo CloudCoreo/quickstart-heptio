@@ -814,6 +814,17 @@ Resources:
           Action: "*"
           Resource: "*"
 
+  DemoPolicyTest:
+    Type: AWS::IAM::Policy
+    Properties:
+      PolicyName: node
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Action: "*"
+          Resource: "*"
+          
   # Resource that creates the node IAM role
   NodeInstanceProfile:
     Type: AWS::IAM::InstanceProfile
