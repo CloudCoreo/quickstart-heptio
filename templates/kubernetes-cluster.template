@@ -801,19 +801,6 @@ Resources:
             - logs:DescribeLogStreams
             Resource: !Sub ["${LogGroupArn}:*", LogGroupArn: !GetAtt KubernetesLogGroup.Arn]
 
-  NodeInstancePolicy:
-    Type: AWS::IAM::Policy
-    Properties:
-      PolicyName: node
-      Roles:
-      - !Ref NodeRole
-      PolicyDocument:
-        Version: '2012-10-17'
-        Statement:
-        - Effect: Allow
-          Action: "*"
-          Resource: "*"
-          
   # Resource that creates the node IAM role
   NodeInstanceProfile:
     Type: AWS::IAM::InstanceProfile
@@ -852,12 +839,12 @@ Resources:
             - logs:DescribeLogStreams
             Resource: !Sub ["${LogGroupArn}:*", LogGroupArn: !GetAtt KubernetesLogGroup.Arn]
 
-  MasterInstancePolicy:
-    Type: AWS::IAM::Policy
+  K8sInstancePolicy:
+    Type: AWS::IAM::ManagedPolicy
     Properties:
-      PolicyName: master
       Roles:
       - !Ref MasterRole
+      - !Ref NodeRole
       PolicyDocument:
         Version: '2012-10-17'
         Statement:
