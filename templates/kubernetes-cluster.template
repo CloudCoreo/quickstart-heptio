@@ -464,6 +464,10 @@ Resources:
             CC_AGENT_TOKEN_KEY_ID=${AgentTokenKeyID} \
             bash -c "$(curl -sS -L https://app.cloudcoreo.com/downloads/setup-coreo-agent.sh)"
 
+            sed -i "s|--allow-privileged=true|--allow-privileged=false|;" "/etc/systemd/system/kubelet.service.d/10-kubeadm.conf"
+            systemctl daemon-reload
+            systemctl restart kubelet
+
             /usr/local/bin/cfn-signal \
               --exit-code $? \
               --stack '${AWS::StackName}' \
@@ -687,6 +691,10 @@ Resources:
             CC_AGENT_TOKEN_SECRET_KEY=${AgentSecretKey} \
             CC_AGENT_TOKEN_KEY_ID=${AgentTokenKeyID} \
             bash -c "$(curl -sS -L https://app.cloudcoreo.com/downloads/setup-coreo-agent.sh)"
+
+            sed -i "s|--allow-privileged=true|--allow-privileged=false|;" "/etc/systemd/system/kubelet.service.d/10-kubeadm.conf"
+            systemctl daemon-reload
+            systemctl restart kubelet
 
             /usr/local/bin/cfn-signal \
               --exit-code $? \
